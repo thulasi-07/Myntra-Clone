@@ -7,20 +7,13 @@ const Login = () => {
   const [user, setUser] = useState<any>(null);
 
   return (
-    <div>
       <div className="bg-rose-50 h-screen flex flex-col justify-center items-center">
         <div className="h-96 w-96 bg-white flex flex-col justify-center items-center">
-          <div className="flex justify-start items-start w-full h-64 p-4">
-            <h1 className="font-bold text-lg">
-              Login <span className="font-normal text-sm"> or </span>
-              <span>Signup</span>
-            </h1>
-          </div>
 
-          {/* <h1 className="font-bold text-lg">
+          <h1 className="font-bold text-lg text-start">
             Login <span className=" font-normal text-sm"> or </span>
             <span>Signup</span>
-          </h1> */}
+          </h1>
           <div className="mt-5">
             <PhoneInput
               country={"us"}
@@ -55,7 +48,7 @@ const Login = () => {
           </h1>
         </div>
       </div>
-    </div>
+
   );
 };
 export default Login;

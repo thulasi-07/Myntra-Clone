@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import Navbar from "./Navbar";
 
 const Login = () => {
   const [phone, setPhone] = useState("");
   const [user, setUser] = useState<any>(null);
 
   return (
+    <>
+    <Navbar/>
       <div className="bg-rose-50 h-screen flex flex-col justify-center items-center">
         <div className="h-96 w-96 bg-white flex flex-col justify-center items-center">
 
@@ -48,7 +51,7 @@ const Login = () => {
           </h1>
         </div>
       </div>
-
+</>
   );
 };
 export default Login;

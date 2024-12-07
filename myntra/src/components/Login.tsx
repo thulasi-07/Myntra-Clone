@@ -2,10 +2,17 @@ import React, { useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import Navbar from "./Navbar";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import { auth } from "../firebase/Setup";
 
 const Login = () => {
   const [phone, setPhone] = useState("");
   const [user, setUser] = useState<any>(null);
+
+  const sendOtp = () => {
+    const recaptcha = new RecaptchaVerifier(auth,"recaptcha",{})
+    const confirmation = signInWithPhoneNumber(auth,phone,recaptcha)
+  }
 
   return (
     <>

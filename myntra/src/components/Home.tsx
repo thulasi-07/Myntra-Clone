@@ -1,12 +1,11 @@
 import { url } from "inspector";
 import React, { useEffect, useState } from "react";
-
+import { Link } from "react-router-dom";
 const Home = () => {
 const [product, setProduct] = useState([])
 
 const getProducts = async() => {
     try{
-
     await fetch("https://api.escuelajs.co/api/v1/products")
     .then(res => res.json())
     .then(json => setProduct(json))

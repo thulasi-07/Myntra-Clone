@@ -8,11 +8,29 @@ import { auth } from "../firebase/Setup";
 const Login = () => {
   const [phone, setPhone] = useState("");
   const [user, setUser] = useState<any>(null);
+  const [otp,setOtp] = useState("")
 
   const sendOtp = () => {
-    const recaptcha = new RecaptchaVerifier(auth,"recaptcha",{})
-    const confirmation = signInWithPhoneNumber(auth,phone,recaptcha)
+    try{
+      const recaptcha = new RecaptchaVerifier(auth,"recaptcha",{})
+      const confirmation = signInWithPhoneNumber(auth,phone,recaptcha)
+      setUser(confirmation)
+    }catch(err){
+      console.error(err)
+    }
+   
   }
+
+  const verifyOtp = async() => {
+    try{
+      await user.confirm(otp)
+
+    }catch(err){
+      console.error(err)
+    }
+  }  
+  console.log(auth)
+
 
   return (
     <>
@@ -24,7 +42,7 @@ const Login = () => {
             Login <span className=" font-normal text-sm"> or </span>
             <span>Signup</span>
           </h1>
-          <div className="mt-5">
+         {user == null &&   <div className="mt-5">
             <PhoneInput
               country={"us"}
               value={phone}
@@ -33,25 +51,25 @@ const Login = () => {
               buttonStyle={{ backgroundColor: "white" }}
               inputStyle={{ width: "320px" }}
             />
-          </div>
-
+          </div> }
+          <div id='recaptcha'></div>
           <h1 className="mt-4 text-xs text-gray-400">
             By continuing, I agree to the{" "}
             <span className="text-red-600 font-bold">Terms of Use</span> &{" "}
             <span className="text-red-600 font-bold">Privacy Policy</span>
           </h1>
-          <button className="mt-4 bg-red-500 hover:bg-red-500 text-white w-80 font-bold py-2 px-4 text-sm w-320">
+         {!otp &&  <button className="mt-4 bg-red-500 hover:bg-red-500 text-white w-80 font-bold py-2 px-4 text-sm w-320">
             CONTINUE
-          </button>
-          {/* <div className="mt-3" id="readcapcha"></div>
-          <input
+          </button>}
+          <div className="mt-3" id="readcapcha"></div>
+         {user &&  <input onChange={(e) => setOtp(e.target.value)}
             className="border border-spacing-1 text-gray-900 font-normal outline-none text-sm rounded-sm block w-80 p-2.5 mt-2"
             placeholder="Enter Otp"
             required
-          />
-          <button className="mt-4 bg-red-500 hover:bg-red-500 text-white w-80 font-bold py-2 px-4 text-sm w-320">
+          /> }
+         {otp &&  <button onClick={verifyOtp} className="mt-4 bg-red-500 hover:bg-red-500 text-white w-80 font-bold py-2 px-4 text-sm w-320">
             Verify OTP
-          </button> */}
+          </button>}
           <h1 className="mt-4 text-xs text-gray-400">
             Have trouble logging in?
             <span className="text-red-600 font-bold">Get Help</span>

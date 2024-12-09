@@ -1,8 +1,9 @@
 import React,{useState,useEffect} from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; 
 import Navbar from "./Navbar";
+import OfferTime from "./OfferTime";
 
 
 const Products = () => {
@@ -28,8 +29,14 @@ const Products = () => {
     return (
         <>
         <Navbar/>
+        <OfferTime/>
+        <div className="flex items-center text-gray-500 text-sm ml-5 mt-2">
+        
+        <Link to="/"><h1 className="text-gray-500">Home /</h1></Link>
+        <h1 className="ml-1 font-semibold">{location.state?.category}</h1></div>
+
         <h1 className="text-lg font-bold ml-5 mt-3">{location.state?.category ?? "No Products"}</h1>
-        <div className="grid grid-cols-4 p-3">
+        {location.state?.category ? <div className="grid grid-cols-4 p-3">
             {product.filter((data:any)=> data.category.name.includes(location.state.category)).map((data:any)=>{
                 return <>
                 <div>
@@ -61,7 +68,8 @@ const Products = () => {
             })}
             
 
-        </div></>
+        </div>
+        </>
         
     )
 }

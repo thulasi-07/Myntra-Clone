@@ -2,6 +2,7 @@ import React,{useState,useEffect} from "react";
 import { useLocation } from "react-router-dom";
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; 
+import Navbar from "./Navbar";
 
 
 const Products = () => {
@@ -25,12 +26,14 @@ const Products = () => {
     console.log(product)
 
     return (
+        <>
+        <Navbar/>
+        <h1 className="text-lg font-bold ml-5 mt-3">{location.state?.category ?? "No Products"}</h1>
         <div className="grid grid-cols-4 p-3">
             {product.filter((data:any)=> data.category.name.includes(location.state.category)).map((data:any)=>{
                 return <>
                 <div>
-                <img src={data.images[0]} className="p-2 w-60 h-80"/>
-                <Carousel>
+                <Carousel className="p-2 w-60 h-80 mt-2" autoPlay={true} showThumbs={false} showArrows={false}>
                 <div>
                     <img src= {data.images[0]} />
                     
@@ -58,7 +61,8 @@ const Products = () => {
             })}
             
 
-        </div>
+        </div></>
+        
     )
 }
 

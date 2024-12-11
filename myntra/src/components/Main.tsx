@@ -4,6 +4,7 @@ import Banner from "./Banner";
 import Home from "./Home";
 import OfferTime from "./OfferTime";
 import Products from "./Products";
+import { useState, useEffect } from "react";
 
 const Main = () => {
     const [product, setProduct] = useState([])
